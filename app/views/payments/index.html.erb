@@ -1,0 +1,27 @@
+<h1>All donations made by <%= current_user.email%> </h1>
+<%= link_to "Donate here", new_payment_path %>
+<% unless @data.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+        <% @data.each_with_index do |charge,i|%>
+        <%#= raise @data.inspect%>
+			<tr> 
+        		<td><%= i+1 %></td>		
+        		<td><%= charge.amount%> </td>
+        		<td><%= charge.description%></td>
+        		<td><%=charge.paid%></td>
+        	</tr>
+        <%end%>
+       
+    </tbody>
+</table>
+<%end%>

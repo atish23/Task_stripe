@@ -1,12 +1,13 @@
 class PaymentsController < ApplicationController
     before_filter :authenticate_user!
+
     def index
-      @users = User.all
-      @users.each do |user|
-        charges = Stripe::Charge.retrieve(customer: user.stripe_id)
-        raise charges.inspect
-      end
+        
+        charges = Stripe::Charge.list(customer: current_user.stripe_id)
+        @data = charges.data
+      
     end
+
     def new
         
     end
